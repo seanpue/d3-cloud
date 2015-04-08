@@ -11,6 +11,7 @@
         rotate = cloudRotate,
         padding = cloudPadding,
         spiral = archimedeanSpiral,
+        startCenter = True,
         words = [],
         timeInterval = Infinity,
         event = d3.dispatch("word", "end"),
@@ -45,8 +46,13 @@
             d;
         while (+new Date - start < timeInterval && ++i < n && timer) {
           d = data[i];
-          d.x = (size[0] * (Math.random() + .5)) >> 1;
-          d.y = (size[1] * (Math.random() + .5)) >> 1;
+          if (startCenter) {
+            d.x = (size[0] * (.5)) >> 1;
+            d.y = (size[1] * (.5)) >> 1;                        
+          } else {
+            d.x = (size[0] * (Math.random() + .5)) >> 1;
+            d.y = (size[1] * (Math.random() + .5)) >> 1;            
+          }
           cloudSprite(d, data, i);
           if (d.hasText && place(board, d, bounds)) {
             tags.push(d);
