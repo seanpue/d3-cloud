@@ -11,7 +11,7 @@
         rotate = cloudRotate,
         padding = cloudPadding,
         spiral = archimedeanSpiral,
-        startCenter = True,
+        startCenter = true,
         words = [],
         timeInterval = Infinity,
         event = d3.dispatch("word", "end"),
@@ -46,7 +46,7 @@
             d;
         while (+new Date - start < timeInterval && ++i < n && timer) {
           d = data[i];
-          if (startCenter) {
+          if (startCenter==true) {
             d.x = (size[0] * (.5)) >> 1;
             d.y = (size[1] * (.5)) >> 1;                        
           } else {
@@ -182,6 +182,14 @@
       spiral = spirals[x + ""] || x;
       return cloud;
     };
+
+    cloud.startCenter = function(x) {
+      if (!arguments.length) return startCenter;
+      startCenter = x;
+      return cloud;
+    };
+    
+    
 
     cloud.fontSize = function(x) {
       if (!arguments.length) return fontSize;
